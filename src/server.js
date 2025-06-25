@@ -3,15 +3,15 @@ const { exec } = require("child_process");
 
 const PORT = process.env.PORT || 3000;
 
-console.log("Rodando migrações do Prisma...");
+console.log("Rodando sincronização do Prisma...");
 
-exec("npx prisma migrate deploy", (error, stdout, stderr) => {
+exec("npx prisma db push", (error, stdout, stderr) => {
   if (error) {
-    console.error(`Erro ao rodar migrações: ${error.message}`);
-    process.exit(1); // encerra o app se não conseguir rodar migração
+    console.error(`Erro ao rodar db push: ${error.message}`);
+    process.exit(1);
   }
   if (stderr) {
-    console.error(`Erro: ${stderr}`);
+    console.error(`stderr: ${stderr}`);
   }
   console.log(stdout);
 
